@@ -13,11 +13,15 @@ module.exports = (app) => {
             .exec('npm ls --json', (err, stdout, stderr) => {
                 if (err) {console.log(err)}
                 else {
-                    console.log(JSON.parse(stdout))
-                    response.send(200, {
+                    let formattedResp = JSON.stringify({
                         msg: 'Server is up',
                         packages: JSON.parse(stdout)
-                    })
+                    }, undefined, 2);
+
+                    response.format({
+                        "text/html": () => response.send("<pre>"+formattedResp+"</pre>")
+                    });
+        
                 }
             });
         } catch (error) {
