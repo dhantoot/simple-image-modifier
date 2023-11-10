@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+mongoose.pluralize(null);
 // Define schema
 const Schema = mongoose.Schema;
 
