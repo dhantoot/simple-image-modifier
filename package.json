@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "simple image modifier",
   "main": "index.js",
+  "engines": {
+    "node": ">=20.9.0"
+  },
   "scripts": {
     "test": "jest",
     "start": "node index.js",
