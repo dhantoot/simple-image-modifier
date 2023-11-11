@@ -13,7 +13,7 @@ const limiter = rateLimit({
 	windowMs: 1 * 60 * 1000, // 1 minute
 	max: 5, // Limit each IP to 5 requests per `window` (here, per 1 minute)
 	standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
-	legacyHeaders: true, // Disable the `X-RateLimit-*` headers
+	legacyHeaders: false, // Disable the `X-RateLimit-*` headers
 })
 
 // apply middlewares for express
@@ -26,6 +26,8 @@ app.use(cookieParser());
 app.use("/public",express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false, limit: '50mb' }));
+
+app.set('trust proxy', false)
 
 require('./app')(app);
 
