@@ -5,10 +5,7 @@ module.exports = () => {
     // const url = `mongodb://${DB_HOST}/${DB_NAME}`;
  
     try {
-      mongoose.connect(url, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      });
+      mongoose.connect(url);
     } catch (err) {
       console.error(err.message);
       process.exit(1);
