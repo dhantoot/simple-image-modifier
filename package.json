@@ -18,9 +18,12 @@
   "keywords": [
     "node",
     "express",
+    "sharp",
     "mongodb",
     "mongoose",
-    "sharp"
+    "mongo atlas",
+    "render + github",
+    "request-limiter"
   ],
   "author": "danvincent",
   "license": "MIT",
