@@ -28,7 +28,7 @@ app.use("/public",express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false, limit: '50mb' }));
 
-app.set('trust proxy', SERVER_ENV == 'DEV' ? false : true)
+app.set('trust proxy', false)
 
 require('./app')(app);
 
