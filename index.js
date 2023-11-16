@@ -7,6 +7,7 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const app = express();
 const rateLimit = require('express-rate-limit');
+const { SERVER_ENV } = process.env;
 global.rootdir = __dirname
 
 const limiter = rateLimit({
@@ -27,7 +28,7 @@ app.use("/public",express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false, limit: '50mb' }));
 
-app.set('trust proxy', false)
+app.set('trust proxy', SERVER_ENV == 'DEV' ? false : true)
 
 require('./app')(app);
 

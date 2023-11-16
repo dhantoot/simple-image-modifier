@@ -2,7 +2,7 @@ module.exports = (app) => {
     const cluster = require('node:cluster');
     const totalCPUs = require('node:os').cpus().length;
     const process = require('node:process');
-    const {SERVER_PORT} = process.env;
+    const { SERVER_PORT } = process.env;
 
     if (cluster.isMaster) {
         console.log(`Number of CPUs is ${totalCPUs}`);
@@ -21,7 +21,7 @@ module.exports = (app) => {
 
     } else {
         app.listen(SERVER_PORT, () => {
-            console.log(`Server Started at ${SERVER_PORT}`)
+            console.log(`Server Started at port ${SERVER_PORT}`)
         })
     }
 }

@@ -1,7 +1,7 @@
 module.exports = (app) => {
     app.get("/", async (request, response) => {
         try {
-            response.send(200, 'Server is up !')
+            response.status(200).send('Server is up !');
         } catch (error) {
             response.status(500).send(error);
         }
@@ -50,7 +50,7 @@ module.exports = (app) => {
 
         // converts the arraybuffer to base64
         const buffer = await Buffer.from(response.data, "base64");
-        console.log('buffer from axios:', buffer)
+        console.log('buffer length from axios:', buffer?.length)
 
         // convert the buffer to file and save somewhere
         await sharp(buffer)
@@ -67,12 +67,17 @@ module.exports = (app) => {
         try {
             const resp = await requestInfo.save();
             console.log({resp})
+            if (resp._id) {
+                console.log('Successfully saved');
+            } else {
+                console.log('Information not saved')
+            }
         } catch (error) {
             console.log({error})
         }
         
         res.set({'Content-Type': 'image/jpg'});
-        res.send(buffered);
+        res.status(200).send(buffered);
 
     })
 }
