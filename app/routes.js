@@ -5,7 +5,7 @@ module.exports = (app) => {
         } catch (error) {
             response.status(500).send(error);
         }
-    })
+    });
 
     app.get("/api/status", async (request, response) => {
         try {
@@ -27,7 +27,7 @@ module.exports = (app) => {
         } catch (error) {
             response.status(500).send(error);
         }
-    })
+    });
 
     app.get('/api/process-image', async (req, res) => {
         const RequestInfoModel = require('./models')
@@ -69,6 +69,19 @@ module.exports = (app) => {
             console.log({resp})
             if (resp._id) {
                 console.log('Successfully saved');
+
+                // Calling external service to process heavy jobs after saving info to DB
+                // const Client = require('./httpClient');
+                // const options = {
+                //     method: 'post',
+                //     url: 'http://localhost:4000/api/run-jobs',
+                //     data: {
+                //       firstName: 'Fred',
+                //       lastName: 'Flintstone'
+                //     }
+                // }
+                // const httpClient = new Client('POST', options);
+                // httpClient.post();
             } else {
                 console.log('Information not saved')
             }
@@ -79,5 +92,5 @@ module.exports = (app) => {
         res.set({'Content-Type': 'image/jpg'});
         res.status(200).send(buffered);
 
-    })
+    });
 }
