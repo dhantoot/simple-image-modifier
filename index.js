@@ -6,16 +6,9 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const app = express();
-const rateLimit = require('express-rate-limit');
-const { SERVER_ENV } = process.env;
-global.rootdir = __dirname
 
-const limiter = rateLimit({
-	windowMs: 1 * 60 * 1000, // 1 minute
-	max: 100, // Limit each IP to 100 requests per `window` (here, per 1 minute)
-	standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
-	legacyHeaders: false, // Disable the `X-RateLimit-*` headers
-})
+const { limiter } = require('./app/utils');
+global.rootdir = __dirname;
 
 // apply middlewares for express
 app.use(limiter);
@@ -33,6 +26,6 @@ app.set('trust proxy', false)
 require('./app')(app);
 
 process.on("unhandledRejection", err => {
-    console.log(`An error occurred: ${err.message}`)
-    process.exit(1)
+    console.log(`An error occurred: ${err.message}`);
+    process.exit(1);
 })
