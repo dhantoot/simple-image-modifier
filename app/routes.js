@@ -19,7 +19,7 @@ module.exports = (app) => {
                     }, undefined, 2);
 
                     response.format({
-                        "text/html": () => response.send("<pre>"+formattedResp+"</pre>")
+                        "text/html": () => response.status(200).send("<pre>"+formattedResp+"</pre>")
                     });
         
                 }
@@ -65,7 +65,8 @@ module.exports = (app) => {
         // Saving information to Database
         const requestInfo = new RequestInfoModel(info);
         try {
-            await requestInfo.save();
+            const resp = await requestInfo.save();
+            console.log({resp})
         } catch (error) {
             console.log({error})
         }
